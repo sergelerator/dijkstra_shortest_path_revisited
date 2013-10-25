@@ -1,0 +1,3 @@
+class Dijkstra::Node
+
+end
