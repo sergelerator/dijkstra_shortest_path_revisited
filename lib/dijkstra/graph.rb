@@ -8,8 +8,16 @@ class Dijkstra::Graph
     b.paths.push new_path
   end
 
-  def measure_distance_from(source)
+  def measure_distance_labels_from(source)
     reset_distance_labels
+    source.distance_label = 0
+    ordered_set = nodes.clone
+
+    until ordered_set.empty?
+      ordered_set.sort_by! { |e| e.distance_label }
+      next_node = ordered_set.shift
+      next_node.measure_neighbours_distance
+    end
   end
 
   def nodes
@@ -22,18 +30,6 @@ class Dijkstra::Graph
 
   def reset_distance_labels
     nodes.each(&:reset_distance_label)
-  end
-
-  def measure_distance_labels_from(source)
-    reset_distance_labels
-    source.distance_label = 0
-    ordered_set = nodes.clone
-
-    until ordered_set.empty?
-      ordered_set.sort_by! { |e| e.distance_label }
-      next_node = ordered_set.shift
-      next_node.measure_neighbours_distance
-    end
   end
 
   def shortest_path(options)
