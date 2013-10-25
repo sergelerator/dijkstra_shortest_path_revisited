@@ -1,10 +1,11 @@
 # Path class to represent the way that links two nodes
 #
 class Dijkstra::Path
-  def initialize(node_a, node_b, distance)
-    @node_a   = node_a
-    @node_b   = node_b
-    @distance = distance
-  end
+  attr_reader :left_end, :right_end, :distance
 
+  def initialize(left_end, right_end, distance)
+    @left_end   = left_end
+    @right_end  = right_end
+    @distance   = distance
+  end
 end
