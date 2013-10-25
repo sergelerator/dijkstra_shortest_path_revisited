@@ -34,6 +34,10 @@ describe Dijkstra::Graph do
       it 'sets node_0#distance_label to 0' do
         expect(node_0.distance_label).to eq 0
       end
+
+      it 'sets node_1#distance_label to 7' do
+        expect(node_1.distance_label).to eq 7
+      end
     end
   end
 
@@ -54,13 +58,27 @@ describe Dijkstra::Graph do
   end
 
   describe '#shortest_path' do
-    context 'default example' do
+    context 'node_0 to node_1' do
       let(:shortest_path) do
         default_example.shortest_path(from: node_0, to: node_1)
       end
 
       it 'returns the shortest path from source to destination' do
         expect(shortest_path[0]).to eq node_0
+        expect(shortest_path[1]).to eq node_1
+      end
+    end
+
+    context 'default_example' do
+      let(:shortest_path) do
+        default_example.shortest_path(from: node_0, to: node_4)
+      end
+
+      it 'returns the shortest path from source to destination' do
+        expect(shortest_path[0]).to eq node_0
+        expect(shortest_path[1]).to eq node_2
+        expect(shortest_path[2]).to eq node_5
+        expect(shortest_path[3]).to eq node_4
       end
     end
   end

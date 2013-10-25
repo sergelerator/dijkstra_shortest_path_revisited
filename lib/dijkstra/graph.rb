@@ -43,5 +43,6 @@ class Dijkstra::Graph
     measure_distance_labels_from(source)
     (path = []).push destination
     path.unshift path.first.previous_node until path.first.previous_node.nil?
+    path
   end
 end
