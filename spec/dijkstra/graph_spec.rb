@@ -29,7 +29,7 @@ describe Dijkstra::Graph do
   describe '#measure_distance_labels_from' do
     context 'default_example' do
       before  { default_example.measure_distance_labels_from(node_0) }
-      after   { default_example.reset_distance_labels(node_0) }
+      after   { default_example.reset_distance_labels }
 
       it 'sets node_0#distance_label to 0' do
         expect(node_0.distance_label).to eq 0
