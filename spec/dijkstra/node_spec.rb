@@ -16,25 +16,26 @@ describe Dijkstra::Node do
       let(:neighbour_3) { Dijkstra::Node.new }
 
       let(:node) do
-        Dijkstra::Node.new.tap do |node|
-          node.paths.push Dijkstra::Path.new(node, neighbour_1, 2)
-          node.paths.push Dijkstra::Path.new(node, neighbour_2, 4)
-          node.paths.push Dijkstra::Path.new(node, neighbour_3, 5)
+        Dijkstra::Node.new.tap do |local|
+          local.paths.push Dijkstra::Path.new(local, neighbour_1, 2)
+          local.paths.push Dijkstra::Path.new(local, neighbour_2, 4)
+          local.paths.push Dijkstra::Path.new(local, neighbour_3, 5)
+          local.distance_label = 0
         end
       end
 
       before { node.measure_neighbours_distance }
 
       it 'sets neighbour_1.distance_label to 2' do
-        expect(node.neighbours[0].distance_label).to be 2
+        expect(neighbour_1.distance_label).to be 2
       end
 
       it 'sets neighbour_2.distance_label to 4' do
-        expect(node.neighbours[1].distance_label).to be 4
+        expect(neighbour_2.distance_label).to be 4
       end
 
       it 'sets neighbour_3.distance_label to 5' do
-        expect(node.neighbours[2].distance_label).to be 5
+        expect(neighbour_3.distance_label).to be 5
       end
     end
   end
