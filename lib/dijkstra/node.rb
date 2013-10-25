@@ -1,7 +1,7 @@
 # Node class to represent Graph's interest points, also called 'Vertex'
 #
 class Dijkstra::Node
-  attr_reader :distance_label
+  attr_accessor :distance_label
 
   def initialize
     @distance_label = Dijkstra::Infinity
@@ -12,6 +12,6 @@ class Dijkstra::Node
   end
 
   def reset_distance_label
-    @distance_label = nil
+    @distance_label = Dijkstra::Infinity
   end
 end

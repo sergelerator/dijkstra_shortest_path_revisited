@@ -26,6 +26,17 @@ describe Dijkstra::Graph do
   let(:node_4) { Dijkstra::Node.new }
   let(:node_5) { Dijkstra::Node.new }
 
+  describe '#measure_distance_labels_from' do
+    context 'default_example' do
+      before  { default_example.measure_distance_labels_from(node_0) }
+      after   { default_example.reset_distance_labels(node_0) }
+
+      it 'sets node_0#distance_label to 0' do
+        expect(node_0.distance_label).to eq 0
+      end
+    end
+  end
+
   describe '#nodes' do
     context 'default example' do
       it 'returns six nodes' do
@@ -35,13 +46,21 @@ describe Dijkstra::Graph do
       it 'returns node_0 at index 0' do
         expect(default_example.nodes[0]).to eq node_0
       end
+
+      it 'returns node_5 at index 5' do
+        expect(default_example.nodes[5]).to eq node_5
+      end
     end
   end
 
   describe '#shortest_path' do
     context 'default example' do
-      xit 'returns the shortest path from source to destination' do
-        expect(default_example.shortest_path[0]).to eq node_0
+      let(:shortest_path) do
+        default_example.shortest_path(from: node_0, to: node_1)
+      end
+
+      it 'returns the shortest path from source to destination' do
+        expect(shortest_path[0]).to eq node_0
       end
     end
   end
