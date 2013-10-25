@@ -8,11 +8,19 @@ class Dijkstra::Graph
     b.paths.push new_path
   end
 
+  def measure_distance_from(source)
+    reset_distance_labels
+  end
+
   def nodes
     @nodes ||= []
   end
 
   def paths
     @paths ||= []
+  end
+
+  def reset_distance_labels
+    nodes.each(&:reset_distance_label)
   end
 end

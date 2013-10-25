@@ -5,4 +5,7 @@ class Dijkstra::Node
     @paths ||= []
   end
 
+  def reset_distance_label
+    @distance_label = nil
+  end
 end
