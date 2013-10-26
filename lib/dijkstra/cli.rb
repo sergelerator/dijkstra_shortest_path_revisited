@@ -23,15 +23,18 @@ class Dijkstra::CLI
     method(method_name).call(*arguments) unless command == 'exit'
   end
 
-  def self.find(source, destination)
-    path = graph.shortest_path from: source, to: destination
+  def self.find(source = nil, destination = nil)
+    source && destination || (return invalid_find)
+    s_node, d_node = graph.nodes[source.to_i], graph.nodes[destination.to_i]
+    path = graph.shortest_path from: s_node, to: d_node
     puts "Shortest path: [#{path.join ', '}]"
   end
 
-  def self.link_nodes(index_left, index_right, distance)
-    left_node, right_node = graph.nodes[index_left], graph.nodes[index_right]
-    graph.link_nodes(left_node, right_node, distance)
-    print "Linked node #{index_left} with #{index_right}."
+  def self.link_nodes(right = nil, left = nil, distance = nil)
+    left && right && distance || (return invalid_link)
+    left_node, right_node = graph.nodes[left.to_i], graph.nodes[right.to_i]
+    graph.link_nodes(left_node, right_node, distance: distance)
+    print "Linked node #{left} with #{right}."
     puts  "Path's distance: #{distance}"
   end
 
@@ -62,5 +65,14 @@ class Dijkstra::CLI
 
   def self.show_nodes
     puts graph.nodes.length
+  end
+
+  def self.invalid_find
+    puts 'Find needs to know the source and destination nodes'
+  end
+
+  def self.invalid_link
+    puts('Link needs to know the source and destination nodes,' +
+         ' as well as the distance between them')
   end
 end
