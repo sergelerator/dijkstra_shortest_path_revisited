@@ -1,7 +1,7 @@
 # Node class to represent Graph's interest points, also called 'Vertex'
 #
 class Dijkstra::Node
-  attr_accessor :distance_label, :path
+  attr_accessor :distance_label, :label, :path
   attr_reader   :previous_node
 
   def initialize
