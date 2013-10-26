@@ -81,5 +81,29 @@ describe Dijkstra::Graph do
         expect(shortest_path[3]).to eq node_4
       end
     end
+
+    context 'from node_0 to node_3' do
+      let(:shortest_path) do
+        default_example.shortest_path(from: node_0, to: node_3)
+      end
+
+      it 'returns the shortest path from source to destination' do
+        expect(shortest_path[0]).to eq node_0
+        expect(shortest_path[1]).to eq node_2
+        expect(shortest_path[2]).to eq node_3
+      end
+    end
+
+    context 'from node_4 to node_2' do
+      let(:shortest_path) do
+        default_example.shortest_path(from: node_4, to: node_2)
+      end
+
+      it 'returns the shortest path from source to destination' do
+        expect(shortest_path[0]).to eq node_4
+        expect(shortest_path[1]).to eq node_5
+        expect(shortest_path[2]).to eq node_2
+      end
+    end
   end
 end
