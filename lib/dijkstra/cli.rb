@@ -27,14 +27,14 @@ class Dijkstra::CLI
     source && destination || (return invalid_find)
     s_node, d_node = graph.nodes[source.to_i], graph.nodes[destination.to_i]
     path = graph.shortest_path from: s_node, to: d_node
-    puts "Shortest path: [#{path.join ', '}]"
+    puts "Shortest path: [#{path.map(&:label).join ', '}]"
   end
 
   def self.link_nodes(right = nil, left = nil, distance = nil)
     left && right && distance || (return invalid_link)
     left_node, right_node = graph.nodes[left.to_i], graph.nodes[right.to_i]
-    graph.link_nodes(left_node, right_node, distance: distance)
-    print "Linked node #{left} with #{right}."
+    graph.link_nodes(left_node, right_node, distance: distance.to_i)
+    print "Linked node #{left} with #{right}. "
     puts  "Path's distance: #{distance}"
   end
 
@@ -51,7 +51,9 @@ class Dijkstra::CLI
     @graph = Dijkstra::Graph.new
     puts 'Created a graph object. How many nodes do you want it to have? '
     @node_quantity = gets.to_i
-    @node_quantity.times { @graph.nodes.push Dijkstra::Node.new }
+    @node_quantity.times do |i|
+      @graph.nodes.push Dijkstra::Node.new.tap { |node| node.label = i }
+    end
     puts "Created #{@node_quantity} nodes within the graph."
     prompt
   end
